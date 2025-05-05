@@ -1,0 +1,224 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>OCUVA – Stream Intelligence Reimagined</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #00ffff;
+      --primary-glow: rgba(0, 255, 255, 0.2);
+      --primary-dark: #00cccc;
+      --dark: #0e1117;
+      --dark-glow: rgba(14, 17, 23, 0.9);
+      --light: #f8f9fa;
+      --gray: #6c757d;
+      --transition: all 0.3s ease-in-out;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: var(--dark);
+      color: var(--light);
+      overflow-x: hidden;
+    }
+
+    .navbar {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background: var(--dark-glow);
+      backdrop-filter: blur(10px);
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 1000;
+      box-shadow: 0 0 20px var(--primary-glow);
+    }
+
+    .logo {
+      color: var(--primary);
+      font-size: 1.8rem;
+      font-weight: bold;
+      text-decoration: none;
+      text-shadow: 0 0 5px var(--primary);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+    }
+
+    .nav-links a {
+      color: var(--light);
+      text-decoration: none;
+      position: relative;
+      transition: var(--transition);
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      bottom: -4px;
+      left: 0;
+      background-color: var(--primary);
+      transition: width 0.3s ease;
+    }
+
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+
+    .hero {
+      height: 100vh;
+      background: radial-gradient(circle at top, #001f33, #0e1117);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    #particles-canvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 100%;
+      z-index: 1;
+    }
+
+    .hero-content {
+      z-index: 2;
+      padding: 2rem;
+      max-width: 800px;
+    }
+
+    .hero-content h1 {
+      font-size: 3.5rem;
+      margin-bottom: 1rem;
+      color: var(--primary);
+      text-shadow: 0 0 10px var(--primary-glow);
+    }
+
+    .hero-content p {
+      font-size: 1.2rem;
+      margin-bottom: 2rem;
+      color: #a8b3c7;
+    }
+
+    .hero-content .btn {
+      display: inline-block;
+      margin: 0.5rem;
+      padding: 1rem 2rem;
+      background: var(--primary);
+      color: #0e1117; /* Darker text for readability */
+      font-weight: bold;
+      text-decoration: none;
+      border-radius: 8px;
+      transition: var(--transition);
+      box-shadow: 0 0 15px var(--primary-glow);
+    }
+
+    .hero-content .btn:hover {
+      background: var(--primary-dark);
+      box-shadow: 0 0 25px var(--primary);
+    }
+
+    footer {
+      text-align: center;
+      padding: 2rem;
+      background: #11131c;
+      color: #777;
+      font-size: 0.9rem;
+      box-shadow: 0 -5px 20px var(--primary-glow);
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar">
+    <a href="#" class="logo">OCUVA</a>
+    <div class="nav-links">
+      <a href="#features">Features</a>
+      <a href="#about">About</a>
+      <a href="#signup">Sign Up</a>
+    </div>
+  </nav>
+
+  <section class="hero">
+    <canvas id="particles-canvas"></canvas>
+    <div class="hero-content">
+      <h1>Stream Smarter with OCUVA</h1>
+      <p>The visual AI assistant born from an aquarium stream — now built for every creator.</p>
+      <a href="#signup" class="btn">Get Early Access</a>
+      <a href="https://buymeacoffee.com/davenevis" class="btn">Become a Supporter</a>
+    </div>
+  </section>
+
+  <footer>
+    © 2025 OCUVA – Built by Dave Nevis
+  </footer>
+
+  <script>
+    const canvas = document.getElementById('particles-canvas');
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    window.addEventListener('resize', () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    });
+
+    class Particle {
+      constructor() {
+        this.x = Math.random() * canvas.width;
+        this.y = Math.random() * canvas.height;
+        this.radius = Math.random() * 2;
+        this.speedX = (Math.random() - 0.5) * 1;
+        this.speedY = (Math.random() - 0.5) * 1;
+      }
+
+      update() {
+        this.x += this.speedX;
+        this.y += this.speedY;
+        if (this.x < 0 || this.x > canvas.width) this.speedX *= -1;
+        if (this.y < 0 || this.y > canvas.height) this.speedY *= -1;
+      }
+
+      draw() {
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+        ctx.fillStyle = "rgba(0, 255, 255, 0.5)";
+        ctx.fill();
+      }
+    }
+
+    const particles = [];
+    for (let i = 0; i < 120; i++) particles.push(new Particle());
+
+    function animate() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      for (let p of particles) {
+        p.update();
+        p.draw();
+      }
+      requestAnimationFrame(animate);
+    }
+
+    animate();
+  </script>
+</body>
+</html>
