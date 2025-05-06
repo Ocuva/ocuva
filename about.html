@@ -1,0 +1,804 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OCUVA – Our Journey</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-PZ2XKFD18B"></script> <!-- ** ID Updated ** -->
+  <script>
+    // Define dataLayer and the gtag function first
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    // Default consent state (denied before user interaction)
+    gtag('consent', 'default', {
+      'analytics_storage': 'denied',
+      'ad_storage': 'denied',
+      'ad_user_data': 'denied',
+      'ad_personalization': 'denied'
+    });
+    // Config will be called later based on consent
+  </script>
+  <style>
+    :root {
+      --primary: #00ffff;
+      --primary-glow: rgba(0, 255, 255, 0.2);
+      --primary-dark: #009dff;
+      --bg-dark: #0a0c14;
+      --text-light: #e8f1fc;
+      --text-medium: #b8c2d9; /* Added for secondary text */
+      --text-dark: #777;
+      --border-color: rgba(0, 255, 255, 0.1);
+      --card-bg: rgba(20, 25, 40, 0.7); /* Slightly different card bg */
+      --transition: all 0.3s ease-in-out;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: radial-gradient(circle at 30% 20%, #0c0f18, #000);
+      color: var(--text-light);
+      overflow-x: hidden;
+      padding: 1rem;
+      position: relative;
+    }
+
+    #particles-canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    .app-shell {
+      position: relative;
+      z-index: 1;
+      max-width: 1100px;
+      margin: 2rem auto;
+      background: rgba(10, 12, 20, 0.9);
+      border-radius: 24px;
+      box-shadow: 0 0 60px rgba(0, 255, 255, 0.08);
+      overflow: hidden;
+      border: 1px solid rgba(0, 255, 255, 0.07);
+      backdrop-filter: blur(14px);
+    }
+
+    .navbar {
+      border-bottom: 1px solid var(--border-color);
+      padding: 1.5rem 3rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: relative; /* For mobile menu positioning */
+    }
+
+    .logo {
+      color: var(--primary);
+      font-size: 2rem;
+      font-weight: bold;
+      text-decoration: none;
+      text-shadow: 0 0 12px var(--primary);
+      transition: var(--transition);
+    }
+
+    .logo:hover {
+        opacity: 0.85;
+        text-shadow: 0 0 18px var(--primary);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+    }
+
+    .nav-links a {
+      color: var(--text-light);
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 1rem;
+      position: relative;
+      transition: var(--transition);
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      bottom: -4px;
+      left: 0;
+      background-color: var(--primary);
+      transition: width 0.3s ease;
+    }
+
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+
+    /* Hamburger Menu Icon (Styles for the toggle button itself) */
+    .menu-toggle {
+        display: none; /* Hidden on desktop by default */
+        flex-direction: column;
+        justify-content: space-around; /* Distribute space for thinner bars */
+        width: 30px; /* Slightly wider touch target */
+        height: 24px; /* Explicit height */
+        cursor: pointer;
+        z-index: 101; /* Above nav links when open */
+        transition: all 0.3s ease-in-out; /* For potential hover effects on the toggle */
+    }
+
+    .menu-toggle span {
+        height: 2px; /* Thinner bars */
+        width: 100%; /* Make bars span the toggle width */
+        background: var(--text-light);
+        border-radius: 1px; /* Sharper edges */
+        transition: all 0.3s ease-in-out;
+        /* margin: 4px 0; Removed, using justify-content on parent */
+    }
+
+     /* Hamburger animation to X */
+    .menu-toggle.active span:nth-child(1) {
+        transform: rotate(45deg) translate(5px, 5px);
+    }
+    .menu-toggle.active span:nth-child(2) {
+        opacity: 0;
+        transform: translateX(-10px); /* Optional: slide out middle bar */
+    }
+    .menu-toggle.active span:nth-child(3) {
+        transform: rotate(-45deg) translate(5px, -5px);
+    }
+
+    /* About Page Specific Styles */
+    .about-container {
+      padding: 4rem 2rem;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .about-header {
+      text-align: center;
+      margin-bottom: 4rem;
+    }
+
+    .about-header h1 {
+      font-size: 2.8rem;
+      color: var(--primary);
+      text-shadow: 0 0 16px var(--primary-glow), 0 0 30px rgba(0,255,255,0.15);
+      margin-bottom: 1rem;
+      font-weight: 700;
+    }
+
+    .about-header p {
+        font-size: 1.15rem;
+        color: var(--text-medium);
+        max-width: 700px;
+        margin: 0 auto;
+        line-height: 1.6;
+    }
+
+    /* Timeline Styles */
+    .timeline {
+        position: relative;
+        padding: 2rem 0;
+        margin-bottom: 4rem;
+    }
+
+    .timeline::before {
+        content: '';
+        position: absolute;
+        left: 30px; /* Adjust based on icon size */
+        top: 0;
+        bottom: 0;
+        width: 2px;
+        background: var(--border-color);
+        opacity: 0.5;
+    }
+
+    .timeline-item {
+        position: relative;
+        margin-bottom: 3rem;
+        padding-left: 70px; /* Space for icon + margin */
+    }
+
+    .timeline-item:last-child {
+        margin-bottom: 0;
+    }
+
+    .timeline-icon {
+        position: absolute;
+        left: 15px; /* Center icon on the line */
+        top: 0;
+        width: 30px;
+        height: 30px;
+        background: var(--bg-dark);
+        border: 2px solid var(--primary);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 0 15px var(--primary-glow);
+        z-index: 1;
+        /* Simple SVG placeholder - replace with actual icons if available */
+        font-size: 1rem; 
+        color: var(--primary);
+    }
+
+    .timeline-content h3 {
+        font-size: 1.3rem;
+        color: var(--text-light);
+        margin-bottom: 0.8rem;
+        font-weight: 600;
+    }
+
+    .timeline-content p {
+        font-size: 1.05rem;
+        color: var(--text-medium);
+        line-height: 1.7;
+    }
+
+    /* Feature Cards Section */
+    .feature-focus {
+        text-align: center;
+        margin-bottom: 4rem;
+    }
+
+    .feature-focus h2 {
+        font-size: 2rem;
+        color: var(--primary);
+        margin-bottom: 2.5rem;
+        text-shadow: 0 0 12px var(--primary-glow);
+    }
+
+    .feature-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 1.5rem;
+        margin-bottom: 4rem;
+    }
+
+    .feature-card {
+        background: var(--card-bg);
+        border: 1px solid var(--border-color);
+        border-radius: 16px;
+        padding: 1.8rem;
+        backdrop-filter: blur(5px);
+        box-shadow: 0 0 18px rgba(0, 255, 255, 0.04);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        display: flex;
+        flex-direction: column;
+        align-items: center; /* Center content */
+        text-align: center;
+    }
+
+    .feature-card:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 0 25px rgba(0, 255, 255, 0.15);
+    }
+
+    .feature-icon {
+        font-size: 2.5rem; /* Emoji size */
+        margin-bottom: 1rem;
+        line-height: 1;
+    }
+
+    .feature-card h4 {
+        font-size: 1.1rem;
+        color: var(--text-light);
+        font-weight: 600;
+        margin-bottom: 0.5rem;
+    }
+
+    .feature-card p {
+        font-size: 0.95rem;
+        color: var(--text-medium);
+        line-height: 1.6;
+    }
+
+    /* Final Message */
+    .final-message {
+        text-align: center;
+    }
+
+    .final-message p {
+        font-size: 1.1rem;
+        color: var(--text-medium);
+        line-height: 1.7;
+        max-width: 750px;
+        margin: 0 auto 1rem auto;
+    }
+
+
+    footer {
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.9rem;
+      background: #0a0d12;
+      color: var(--text-dark);
+      margin-top: 4rem;
+    }
+
+    /* Simple animation for items */
+    [data-aos] {
+        transition-property: transform, opacity, -webkit-transform;
+    }
+
+    /* Cookie Consent Banner */
+    .cookie-banner {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: rgba(10, 12, 20, 0.97);
+        border-top: 1px solid var(--border-color);
+        padding: 1.2rem 2rem;
+        z-index: 1000;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        backdrop-filter: blur(10px);
+        opacity: 1;
+        transition: opacity 0.5s ease, transform 0.5s ease;
+        transform: translateY(0);
+        font-size: 0.9rem;
+    }
+
+    .cookie-banner.hidden {
+        opacity: 0;
+        pointer-events: none;
+        transform: translateY(100%); /* Slide out */
+    }
+
+    .cookie-banner p {
+        margin: 0 1.5rem 0 0;
+        color: var(--text-medium);
+        flex-grow: 1;
+    }
+
+    .cookie-banner a {
+        color: var(--primary);
+        text-decoration: underline;
+        font-weight: 500;
+    }
+     .cookie-banner a:hover {
+        text-decoration: none;
+     }
+
+    .cookie-banner .button-group {
+        display: flex;
+        gap: 0.8rem;
+        flex-shrink: 0;
+    }
+
+    .btn-consent {
+        padding: 0.6rem 1.2rem;
+        font-size: 0.85rem;
+        white-space: nowrap;
+    }
+    /* Add .btn base styles if missing on this page */
+    .btn {
+        display: inline-block;
+        margin: 0.5rem;
+        padding: 1rem 2.4rem;
+        font-size: 1rem;
+        font-weight: 600;
+        border-radius: 12px;
+        color: var(--bg-dark); /* Adjust if needed */
+        background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+        text-decoration: none;
+        box-shadow: 0 0 20px var(--primary-glow);
+        transition: all 0.25s ease-in-out;
+        text-shadow: 0 0 5px rgba(0, 0, 0, 0.4);
+        border: none;
+        cursor: pointer;
+    }
+     .btn:hover {
+        transform: scale(1.05);
+        background: linear-gradient(135deg, #33ffff, #00baff);
+        box-shadow: 0 0 25px rgba(0, 255, 255, 0.4);
+    }
+
+    .btn-secondary {
+        background: transparent;
+        border: 1px solid var(--primary);
+        color: var(--primary) !important; /* Ensure text color */
+        text-shadow: none;
+    }
+
+    .btn-secondary:hover {
+        background: var(--primary-glow);
+        transform: scale(1.03); /* Minor hover effect */
+        box-shadow: none;
+    }
+
+    /* Mobile Responsiveness */
+    @media (max-width: 768px) {
+        .navbar {
+            padding: 1rem 1.5rem;
+        }
+
+        /* Styles for the mobile dropdown menu container */
+        .nav-links {
+            display: flex; 
+            flex-direction: column;
+            position: absolute;
+            top: calc(100% + 8px); 
+            right: 8px;  
+            width: 33%; 
+            min-width: 230px; 
+            max-width: 280px; 
+            
+            background: rgba(10, 12, 20, 0.9); 
+            border: 1px solid var(--border-color); 
+            border-radius: 16px; 
+            padding: 0.4rem; /* Adjusted padding for tighter fit around buttons */
+            box-shadow: 0 5px 30px var(--primary-glow), 0 10px 25px rgba(0,0,0,0.4);
+            z-index: 100; 
+            backdrop-filter: blur(10px); 
+            
+            opacity: 0;
+            transform: translate(15px, -10px) scale(0.9); 
+            transform-origin: top right; 
+            pointer-events: none;
+            transition: opacity 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275), transform 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .nav-links.active {
+            opacity: 1;
+            transform: translate(0, 0) scale(1); 
+            pointer-events: auto;
+        }
+
+        /* Styles for individual links within the mobile dropdown */
+        .nav-links a {
+            padding: 0.8rem 1.2rem; /* Adjusted padding */ 
+            text-align: right; 
+            width: 100%; 
+            color: var(--text-light);
+            font-weight: 500;
+            border-radius: 8px; /* More button-like radius */
+            margin: 0.4rem 0; /* Increased margin for separation */
+            background-color: transparent; /* Ensure base is transparent */
+            transition: color 0.2s ease, background-color 0.2s ease, text-shadow 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .nav-links a:hover,
+        .nav-links a:focus {
+            color: var(--bg-dark); /* Dark text for contrast on hover */
+            background-color: var(--primary-glow); /* More prominent background glow */
+            text-shadow: none; /* Remove general text-shadow if any, rely on bg */
+            transform: translateY(-2px) scale(1.02); /* Lift and scale effect */
+            box-shadow: 0 4px 12px rgba(0, 255, 255, 0.3); /* Shadow for lifted effect */
+            outline: none; 
+        }
+        .nav-links a::after {
+            display: none; 
+        }
+
+        /* Show the hamburger icon on mobile */
+        .menu-toggle {
+            display: flex;
+        }
+
+        .about-container {
+            padding: 3rem 1rem;
+        }
+
+        .about-header h1 {
+            font-size: 2.2rem;
+        }
+        .about-header p {
+            font-size: 1rem;
+        }
+
+        .timeline::before {
+            left: 15px; /* Adjust timeline line for smaller icons */
+        }
+        .timeline-item {
+            padding-left: 45px; /* Adjust space for smaller icons */
+            margin-bottom: 2.5rem;
+        }
+        .timeline-icon {
+            left: 0px;
+            width: 30px;
+            height: 30px;
+            font-size: 0.9rem;
+        }
+        .timeline-content h3 {
+            font-size: 1.15rem;
+        }
+        .timeline-content p {
+            font-size: 0.95rem;
+        }
+
+        .feature-focus h2 {
+            font-size: 1.8rem;
+            margin-bottom: 2rem;
+        }
+        .feature-grid {
+            grid-template-columns: 1fr; /* Stack features */
+            gap: 1.5rem;
+        }
+        .feature-card {
+            padding: 1.5rem;
+        }
+        .feature-card h4 {
+            font-size: 1.05rem;
+        }
+        .final-message p {
+            font-size: 1rem;
+        }
+
+    }
+
+  </style>
+</head>
+<body>
+  <canvas id="particles-canvas"></canvas>
+  <div class="app-shell">
+    <nav class="navbar">
+      <a href="index.html" class="logo">OCUVA</a>
+      <div class="menu-toggle" id="mobile-menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+      <div class="nav-links" id="nav-links-menu">
+        <a href="index.html#features">Features</a>
+        <a href="about.html">About</a>
+        <a href="pricing.html">Pricing</a>
+        <a href="index.html#signup">Sign Up</a>
+      </div>
+    </nav>
+
+    <!-- New About Page Structure -->
+    <div class="about-container">
+        <header class="about-header" data-aos="fade-down">
+            <h1>Our Journey</h1>
+            <p>From a humble aquarium stream to an AI co-pilot for creators everywhere.</p>
+        </header>
+
+        <section class="timeline">
+            <div class="timeline-item" data-aos="fade-right">
+                <div class="timeline-icon">💡</div>
+                <div class="timeline-content">
+                    <h3>The Spark</h3>
+                    <p>OCUVA started as a side project — just me, a webcam, and a peaceful little aquarium stream. What began as a way to watch my shrimp and fish turned into something more: a curiosity about how a system could see, interpret, and even react to a livestream in real-time.</p>
+                </div>
+            </div>
+            <div class="timeline-item" data-aos="fade-right" data-aos-delay="100">
+                <div class="timeline-icon">🧪</div>
+                <div class="timeline-content">
+                    <h3>The Lab</h3>
+                    <p>That livestream became the testing ground for what would eventually evolve into OCUVA — a visual AI assistant designed to understand what's happening on screen and assist without ever stealing the spotlight.</p>
+                </div>
+            </div>
+            <div class="timeline-item" data-aos="fade-right" data-aos-delay="200">
+                <div class="timeline-icon">🚀</div>
+                <div class="timeline-content">
+                    <h3>The Expansion</h3>
+                    <p>Over time, I realised this wasn't just useful for aquarium fans. The same tools I was building could help any creator — from Twitch streamers and YouTubers to educators and podcasters — by offering smart, non-intrusive insights while they broadcast.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="feature-focus" data-aos="fade-up">
+            <h2>What OCUVA Does</h2>
+            <div class="feature-grid">
+                <div class="feature-card" data-aos="fade-up" data-aos-delay="100">
+                    <div class="feature-icon">🔍</div>
+                    <h4>Real-Time Detection</h4>
+                    <p>Identifies key moments and events as they happen live.</p>
+                </div>
+                <div class="feature-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="feature-icon">📊</div>
+                    <h4>Smart Summaries</h4>
+                    <p>Automatically generates concise summaries of stream activity.</p>
+                </div>
+                <div class="feature-card" data-aos="fade-up" data-aos-delay="300">
+                    <div class="feature-icon">🧠</div>
+                    <h4>Intelligent Layer</h4>
+                    <p>Adds a non-intrusive AI visual element to enhance your content.</p>
+                </div>
+                <div class="feature-card" data-aos="fade-up" data-aos-delay="400">
+                    <div class="feature-icon">🎯</div>
+                    <h4>Creator Focus</h4>
+                    <p>Handles observation, letting you stay present and engaged.</p>
+                </div>
+                <div class="feature-card" data-aos="fade-up" data-aos-delay="500">
+                    <div class="feature-icon">📈</div>
+                    <h4>Analytics Insights</h4>
+                    <p>Provides data-driven insights on viewer engagement.</p>
+                </div>
+                <div class="feature-card" data-aos="fade-up" data-aos-delay="600">
+                    <div class="feature-icon">🤖</div>
+                    <h4>Automation</h4>
+                    <p>Automates repetitive tasks like clipping and highlighting.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="final-message" data-aos="fade-up">
+            <p>This project has been built piece by piece — from humble aquarium roots to a creator-first tool that aims to genuinely change the way we think about livestreaming and content interaction.</p>
+            <p>OCUVA is still growing, and your support helps shape what it becomes. If you've ever wanted a co-pilot for your stream that truly gets it, you're in the right place.</p>
+        </section>
+
+    </div> <!-- End About Container -->
+
+    <footer>
+      © 2025 OCUVA – Built by Dave Nevis
+    </footer>
+  </div>
+
+  <!-- Cookie Consent Banner HTML -->
+  <div id="cookie-consent-banner" class="cookie-banner hidden">
+    <p>We use cookies to analyze website traffic and enhance your experience. By clicking "Accept", you consent to the use of analytics cookies. <a href="#">Learn More</a></p> <!-- Placeholder link -->
+    <div class="button-group">
+        <button id="consent-decline" class="btn btn-consent btn-secondary">Decline</button>
+        <button id="consent-accept" class="btn btn-consent">Accept</button>
+    </div>
+  </div>
+
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+    AOS.init({
+      duration: 800,
+      once: true,
+      offset: 100
+    });
+
+    const canvas = document.getElementById('particles-canvas');
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    window.addEventListener('resize', () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    });
+
+    class Particle {
+      constructor() {
+        this.x = Math.random() * canvas.width;
+        this.y = Math.random() * canvas.height;
+        this.radius = Math.random() * 2;
+        this.speedX = (Math.random() - 0.5) * 1;
+        this.speedY = (Math.random() - 0.5) * 1;
+      }
+
+      update() {
+        this.x += this.speedX;
+        this.y += this.speedY;
+        if (this.x < 0 || this.x > canvas.width) this.speedX *= -1;
+        if (this.y < 0 || this.y > canvas.height) this.speedY *= -1;
+      }
+
+      draw() {
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+        ctx.fillStyle = "rgba(0, 255, 255, 0.5)";
+        ctx.fill();
+      }
+    }
+
+    const particles = [];
+    for (let i = 0; i < 120; i++) particles.push(new Particle());
+
+    function animate() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      for (let p of particles) {
+        p.update();
+        p.draw();
+      }
+      requestAnimationFrame(animate);
+    }
+
+    animate();
+
+    // Smooth Scrolling kept for potential future internal links on this page
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const targetId = this.getAttribute('href');
+            if (targetId.length > 1) {
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                  targetElement.scrollIntoView({
+                      behavior: 'smooth'
+                  });
+                }
+            }
+        });
+    });
+
+    // Cookie Consent Logic
+    const consentBanner = document.getElementById('cookie-consent-banner');
+    const acceptBtn = document.getElementById('consent-accept');
+    const declineBtn = document.getElementById('consent-decline');
+    const consentKey = 'ocuva_cookie_consent';
+    const gaTrackingId = 'G-PZ2XKFD18B'; // **** ID Updated ****
+
+    // Ensure gtag function is available
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+
+    function grantConsent() {
+        gtag('consent', 'update', {
+            'analytics_storage': 'granted',
+            'ad_storage': 'granted',
+            'ad_user_data': 'granted',
+            'ad_personalization': 'granted'
+        });
+        localStorage.setItem(consentKey, 'granted');
+        console.log("Consent Granted & GA updated");
+        gtag('config', gaTrackingId); // Configure GA after consent update
+        console.log("GA Configured");
+    }
+
+    function denyConsent() {
+        gtag('consent', 'update', {
+            'analytics_storage': 'denied',
+            'ad_storage': 'denied',
+            'ad_user_data': 'denied',
+            'ad_personalization': 'denied'
+        });
+        localStorage.setItem(consentKey, 'denied');
+        console.log("Consent Denied & GA updated");
+        gtag('config', gaTrackingId); // Still configure GA
+        console.log("GA Configured (with denial)");
+    }
+
+    function handleConsentChoice(granted) {
+        if (granted) {
+            grantConsent();
+        } else {
+            denyConsent();
+        }
+        if(consentBanner) consentBanner.classList.add('hidden');
+    }
+
+    // Check existing consent on page load
+    const currentConsent = localStorage.getItem(consentKey);
+
+    if (!currentConsent) {
+        if(consentBanner) consentBanner.classList.remove('hidden'); // Show banner
+        gtag('config', gaTrackingId); // Config on load (respects default denied)
+        console.log("GA Configured (no prior consent)");
+    } else if (currentConsent === 'granted') {
+        grantConsent(); // Grant consent based on stored preference
+        if(consentBanner) consentBanner.classList.add('hidden'); // Ensure hidden
+    } else { // 'denied'
+        denyConsent(); // Deny consent based on stored preference
+        if(consentBanner) consentBanner.classList.add('hidden'); // Ensure hidden
+    }
+
+    // Add event listeners only if the banner was shown initially
+    if (acceptBtn && declineBtn && !currentConsent) {
+         acceptBtn.addEventListener('click', () => handleConsentChoice(true));
+         declineBtn.addEventListener('click', () => handleConsentChoice(false));
+    }
+
+    // Mobile Menu Toggle
+    const menuToggle = document.getElementById('mobile-menu');
+    const navLinks = document.getElementById('nav-links-menu');
+
+    if (menuToggle && navLinks) {
+        menuToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            menuToggle.classList.toggle('active');
+        });
+    }
+
+  </script>
+</body>
+</html> 

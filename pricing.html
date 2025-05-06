@@ -1,0 +1,710 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OCUVA – Pricing</title> <!-- Changed Title -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <!-- Removed AOS CSS as it's less needed here -->
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-PZ2XKFD18B"></script> <!-- ** ID Updated ** -->
+  <script>
+    // Define dataLayer and the gtag function first
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    // Default consent state (denied before user interaction)
+    gtag('consent', 'default', {
+      'analytics_storage': 'denied',
+      'ad_storage': 'denied',
+      'ad_user_data': 'denied',
+      'ad_personalization': 'denied'
+    });
+    // Config will be called later based on consent
+  </script>
+  <style>
+    :root {
+      --primary: #00ffff;
+      --primary-glow: rgba(0, 255, 255, 0.2);
+      --primary-dark: #009dff;
+      --bg-dark: #0a0c14;
+      --text-light: #e8f1fc;
+      --transition: all 0.3s ease-in-out;
+      --form-bg: rgba(16, 20, 30, 0.9);
+      --form-border: rgba(0, 255, 255, 0.1);
+      --input-bg: rgba(255, 255, 255, 0.05);
+      --input-border: rgba(0, 255, 255, 0.15);
+      --input-text: var(--text-light);
+      --button-text: var(--bg-dark);
+      /* Pricing Table Specific Variables */
+      --table-border: rgba(0, 255, 255, 0.1);
+      --table-header-bg: rgba(0, 255, 255, 0.05);
+      --table-cell-bg: rgba(255, 255, 255, 0.015);
+      --table-highlight-bg: rgba(0, 255, 255, 0.1);
+      --checkmark-color: var(--primary);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: radial-gradient(circle at 30% 20%, #0c0f18, #000);
+      color: var(--text-light);
+      overflow-x: hidden;
+      padding: 1rem;
+      position: relative;
+    }
+
+    #particles-canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    .app-shell {
+      position: relative;
+      z-index: 1;
+      max-width: 1100px;
+      margin: 2rem auto;
+      background: rgba(10, 12, 20, 0.9);
+      border-radius: 24px;
+      box-shadow: 0 0 60px rgba(0, 255, 255, 0.08);
+      overflow: hidden;
+      border: 1px solid rgba(0, 255, 255, 0.07);
+      backdrop-filter: blur(14px);
+    }
+
+    .navbar {
+      border-bottom: 1px solid var(--border-color);
+      padding: 1.5rem 3rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: relative; /* For mobile menu positioning */
+    }
+
+    .logo {
+      color: var(--primary);
+      font-size: 2rem;
+      font-weight: bold;
+      text-decoration: none;
+      text-shadow: 0 0 12px var(--primary);
+      transition: var(--transition); /* Added transition */
+    }
+
+    .logo:hover {
+        opacity: 0.85;
+        text-shadow: 0 0 18px var(--primary);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+    }
+
+    .nav-links a {
+      color: var(--text-light);
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 1rem;
+      position: relative;
+      transition: var(--transition);
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      bottom: -4px;
+      left: 0;
+      background-color: var(--primary);
+      transition: width 0.3s ease;
+    }
+
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+
+    .btn {
+        display: inline-block;
+        margin: 0.5rem;
+        padding: 1rem 2.4rem;
+        font-size: 1rem;
+        font-weight: 600;
+        border-radius: 12px;
+        color: var(--button-text); /* Changed to variable */
+        background: linear-gradient(135deg, var(--primary), var(--primary-dark)); /* Changed to variables */
+        text-decoration: none;
+        box-shadow: 0 0 20px var(--primary-glow); /* Changed to variable */
+        transition: all 0.25s ease-in-out;
+        text-shadow: 0 0 5px rgba(0, 0, 0, 0.4);
+        border: none; /* Added border none */
+        cursor: pointer; /* Added cursor pointer */
+    }
+
+    .btn:hover {
+        transform: scale(1.05);
+        background: linear-gradient(135deg, #33ffff, #00baff); /* Lighter hover */
+        box-shadow: 0 0 25px rgba(0, 255, 255, 0.4);
+    }
+
+    /* Hamburger Menu Icon (Styles for the toggle button itself) */
+    .menu-toggle {
+        display: none; /* Hidden on desktop by default */
+        flex-direction: column;
+        justify-content: space-around; /* Distribute space for thinner bars */
+        width: 30px; /* Slightly wider touch target */
+        height: 24px; /* Explicit height */
+        cursor: pointer;
+        z-index: 101; /* Above nav links when open */
+        transition: all 0.3s ease-in-out; /* For potential hover effects on the toggle */
+    }
+
+    .menu-toggle span {
+        height: 2px; /* Thinner bars */
+        width: 100%; /* Make bars span the toggle width */
+        background: var(--text-light);
+        border-radius: 1px; /* Sharper edges */
+        transition: all 0.3s ease-in-out;
+        /* margin: 4px 0; Removed, using justify-content on parent */
+    }
+
+    /* Hamburger animation to X */
+    .menu-toggle.active span:nth-child(1) {
+        transform: rotate(45deg) translate(5px, 5px);
+    }
+    .menu-toggle.active span:nth-child(2) {
+        opacity: 0;
+        transform: translateX(-10px); /* Optional: slide out middle bar */
+    }
+    .menu-toggle.active span:nth-child(3) {
+        transform: rotate(-45deg) translate(5px, -5px);
+    }
+
+    /* Pricing Section Specific Styles */
+    .pricing-section {
+        padding: 4rem 2rem;
+        text-align: center;
+    }
+
+    .pricing-section h1 {
+        font-size: 2.8rem;
+        color: var(--primary);
+        text-shadow: 0 0 16px var(--primary-glow), 0 0 30px rgba(0,255,255,0.15);
+        margin-bottom: 1rem;
+    }
+
+    .pricing-section .section-intro {
+        font-size: 1.1rem;
+        max-width: 720px;
+        margin: 0 auto 3rem;
+        color: #b8c2d9;
+    }
+
+    .pricing-table {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 2rem;
+        max-width: 900px; /* Limit overall table width */
+        margin: 0 auto; /* Center the table grid */
+    }
+
+    .pricing-plan {
+        background: var(--table-cell-bg);
+        border: 1px solid var(--table-border);
+        border-radius: 16px;
+        padding: 2rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        box-shadow: 0 0 18px rgba(0, 255, 255, 0.05);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .pricing-plan:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 0 25px rgba(0, 255, 255, 0.2);
+    }
+
+    .pricing-plan h2 {
+        font-size: 1.6rem;
+        color: var(--primary);
+        margin-bottom: 0.5rem;
+    }
+
+    .pricing-plan .price {
+        font-size: 2.5rem;
+        font-weight: bold;
+        color: var(--text-light);
+        margin-bottom: 0.5rem;
+    }
+
+    .pricing-plan .price span {
+        font-size: 1rem;
+        font-weight: 400;
+        color: #b8c2d9;
+    }
+
+    .pricing-plan .plan-description {
+        font-size: 0.95rem;
+        color: #b8c2d9;
+        margin-bottom: 1.5rem;
+        min-height: 40px; /* Ensure consistent height */
+    }
+
+    .pricing-plan ul {
+        list-style: none;
+        padding: 0;
+        margin-bottom: 2rem;
+        text-align: left;
+        width: 100%;
+    }
+
+    .pricing-plan ul li {
+        margin-bottom: 0.8rem;
+        font-size: 0.95rem;
+        color: #d3dce8;
+        display: flex;
+        align-items: center;
+    }
+
+    .pricing-plan ul li svg {
+        width: 18px;
+        height: 18px;
+        fill: var(--checkmark-color);
+        margin-right: 0.7rem;
+        flex-shrink: 0; /* Prevent icon shrinking */
+    }
+
+    .pricing-plan .btn {
+        margin-top: auto; /* Push button to bottom */
+        width: 80%; /* Control button width */
+    }
+
+    /* Highlight popular plan */
+    .pricing-plan.popular {
+        border-color: var(--primary);
+        background: var(--table-highlight-bg);
+        box-shadow: 0 0 30px rgba(0, 255, 255, 0.15);
+    }
+
+
+    footer {
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.9rem;
+      background: #0a0d12;
+      color: #777;
+      margin-top: 4rem; /* Add margin above footer */
+    }
+
+    /* Cookie Consent Banner */
+    .cookie-banner {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: rgba(10, 12, 20, 0.97);
+        border-top: 1px solid var(--border-color);
+        padding: 1.2rem 2rem;
+        z-index: 1000;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        backdrop-filter: blur(10px);
+        opacity: 1;
+        transition: opacity 0.5s ease, transform 0.5s ease;
+        transform: translateY(0);
+        font-size: 0.9rem;
+    }
+
+    .cookie-banner.hidden {
+        opacity: 0;
+        pointer-events: none;
+        transform: translateY(100%); /* Slide out */
+    }
+
+    .cookie-banner p {
+        margin: 0 1.5rem 0 0;
+        color: var(--text-medium);
+        flex-grow: 1;
+    }
+
+    .cookie-banner a {
+        color: var(--primary);
+        text-decoration: underline;
+        font-weight: 500;
+    }
+     .cookie-banner a:hover {
+        text-decoration: none;
+     }
+
+    .cookie-banner .button-group {
+        display: flex;
+        gap: 0.8rem;
+        flex-shrink: 0;
+    }
+
+    .btn-consent {
+        padding: 0.6rem 1.2rem;
+        font-size: 0.85rem;
+        white-space: nowrap;
+    }
+
+    .btn-secondary {
+        background: transparent;
+        border: 1px solid var(--primary);
+        color: var(--primary) !important; /* Ensure text color */
+        text-shadow: none;
+    }
+
+    .btn-secondary:hover {
+        background: var(--primary-glow);
+        transform: scale(1.03); /* Minor hover effect */
+        box-shadow: none;
+    }
+
+    /* Mobile Responsiveness */
+    @media (max-width: 768px) {
+        .navbar {
+            padding: 1rem 1.5rem;
+        }
+
+        /* Styles for the mobile dropdown menu container */
+        .nav-links {
+            display: flex; 
+            flex-direction: column;
+            position: absolute;
+            top: calc(100% + 8px); 
+            right: 8px;  
+            width: 33%; 
+            min-width: 230px; 
+            max-width: 280px; 
+            
+            background: rgba(10, 12, 20, 0.9); 
+            border: 1px solid var(--border-color); 
+            border-radius: 16px; 
+            padding: 0.4rem; /* Adjusted padding for tighter fit around buttons */
+            box-shadow: 0 5px 30px var(--primary-glow), 0 10px 25px rgba(0,0,0,0.4);
+            z-index: 100; 
+            backdrop-filter: blur(10px); 
+            
+            opacity: 0;
+            transform: translate(15px, -10px) scale(0.9); 
+            transform-origin: top right; 
+            pointer-events: none;
+            transition: opacity 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275), transform 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .nav-links.active {
+            opacity: 1;
+            transform: translate(0, 0) scale(1); 
+            pointer-events: auto;
+        }
+
+        /* Styles for individual links within the mobile dropdown */
+        .nav-links a {
+            padding: 0.8rem 1.2rem; /* Adjusted padding */ 
+            text-align: right; 
+            width: 100%; 
+            color: var(--text-light);
+            font-weight: 500;
+            border-radius: 8px; /* More button-like radius */
+            margin: 0.4rem 0; /* Increased margin for separation */
+            background-color: transparent; /* Ensure base is transparent */
+            transition: color 0.2s ease, background-color 0.2s ease, text-shadow 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .nav-links a:hover,
+        .nav-links a:focus {
+            color: var(--bg-dark); /* Dark text for contrast on hover */
+            background-color: var(--primary-glow); /* More prominent background glow */
+            text-shadow: none; /* Remove general text-shadow if any, rely on bg */
+            transform: translateY(-2px) scale(1.02); /* Lift and scale effect */
+            box-shadow: 0 4px 12px rgba(0, 255, 255, 0.3); /* Shadow for lifted effect */
+            outline: none; 
+        }
+        .nav-links a::after {
+            display: none; 
+        }
+
+        /* Show the hamburger icon on mobile */
+        .menu-toggle {
+            display: flex;
+        }
+
+        .pricing-section {
+            padding: 3rem 1rem;
+        }
+        .pricing-section h1 {
+            font-size: 2.2rem;
+        }
+        .pricing-section .section-intro {
+            font-size: 1rem;
+            margin-bottom: 2rem;
+        }
+        .pricing-table {
+            grid-template-columns: 1fr; /* Stack plans */
+            gap: 1.5rem;
+        }
+        .pricing-plan {
+            padding: 1.5rem;
+        }
+        .pricing-plan h2 {
+            font-size: 1.4rem;
+        }
+        .pricing-plan .price {
+            font-size: 2rem;
+        }
+        .pricing-plan .btn {
+            width: 100%; /* Full width button on mobile */
+            padding: 0.8rem 1.5rem;
+        }
+    }
+
+  </style>
+</head>
+<body>
+  <canvas id="particles-canvas"></canvas>
+  <div class="app-shell">
+    <nav class="navbar">
+      <a href="index.html" class="logo">OCUVA</a> <!-- Link back to index -->
+      <div class="menu-toggle" id="mobile-menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+      <div class="nav-links" id="nav-links-menu">
+        <!-- Update links to point to index.html anchors or the pricing page -->
+        <a href="index.html#features">Features</a>
+        <a href="about.html">About</a> <!-- Link to new about page -->
+        <a href="pricing.html">Pricing</a> <!-- Active page, no link needed or link to # -->
+        <a href="index.html#signup">Sign Up</a>
+      </div>
+    </nav>
+
+    <!-- Pricing Section -->
+    <section id="pricing" class="pricing-section">
+        <h1>Choose Your Plan</h1>
+        <p class="section-intro">
+            Start enhancing your streams today. Simple, transparent pricing for creators of all sizes.
+            (Pricing details are placeholders)
+        </p>
+
+        <div class="pricing-table">
+            <!-- Plan 1: Basic/Free -->
+            <div class="pricing-plan">
+                <h2>Basic</h2>
+                <div class="price">$0<span>/mo</span></div>
+                <p class="plan-description">Get started with core features.</p>
+                <ul>
+                    <li><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 15.172l9.192-9.193 1.415 1.414L10 18l-6.364-6.364 1.414-1.414z"/></svg> Basic Visual Recognition</li>
+                    <li><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 15.172l9.192-9.193 1.415 1.414L10 18l-6.364-6.364 1.414-1.414z"/></svg> Limited Event Summaries</li>
+                    <li><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 15.172l9.192-9.193 1.415 1.414L10 18l-6.364-6.364 1.414-1.414z"/></svg> Community Support</li>
+                </ul>
+                <a href="index.html#signup" class="btn">Sign Up</a>
+            </div>
+
+            <!-- Plan 2: Pro (Popular) -->
+            <div class="pricing-plan popular">
+                <h2>Pro</h2>
+                <div class="price">$19<span>/mo</span></div>
+                <p class="plan-description">For serious creators and streamers.</p>
+                <ul>
+                    <li><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 15.172l9.192-9.193 1.415 1.414L10 18l-6.364-6.364 1.414-1.414z"/></svg> Advanced Visual Recognition</li>
+                    <li><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 15.172l9.192-9.193 1.415 1.414L10 18l-6.364-6.364 1.414-1.414z"/></svg> Real-time Smart Summaries</li>
+                    <li><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 15.172l9.192-9.193 1.415 1.414L10 18l-6.364-6.364 1.414-1.414z"/></svg> Sentiment Analysis (Beta)</li>
+                    <li><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 15.172l9.192-9.193 1.415 1.414L10 18l-6.364-6.364 1.414-1.414z"/></svg> Priority Support</li>
+                </ul>
+                <a href="index.html#signup" class="btn">Choose Pro</a>
+            </div>
+
+            <!-- Plan 3: Enterprise -->
+            <div class="pricing-plan">
+                <h2>Enterprise</h2>
+                <div class="price">Custom</div>
+                <p class="plan-description">Tailored solutions for teams & businesses.</p>
+                 <ul>
+                    <li><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 15.172l9.192-9.193 1.415 1.414L10 18l-6.364-6.364 1.414-1.414z"/></svg> Custom AI Models</li>
+                    <li><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 15.172l9.192-9.193 1.415 1.414L10 18l-6.364-6.364 1.414-1.414z"/></svg> Dedicated Support & SLA</li>
+                    <li><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 15.172l9.192-9.193 1.415 1.414L10 18l-6.364-6.364 1.414-1.414z"/></svg> API Access & Integrations</li>
+                </ul>
+                <a href="index.html#signup" class="btn">Contact Us</a> <!-- Should ideally link to a contact form/email -->
+            </div>
+        </div>
+    </section>
+
+    <footer>
+      © 2025 OCUVA – Built by Dave Nevis
+    </footer>
+  </div>
+
+  <!-- Cookie Consent Banner HTML -->
+  <div id="cookie-consent-banner" class="cookie-banner hidden">
+    <p>We use cookies to analyze website traffic and enhance your experience. By clicking "Accept", you consent to the use of analytics cookies. <a href="#">Learn More</a></p> <!-- Placeholder link -->
+    <div class="button-group">
+        <button id="consent-decline" class="btn btn-consent btn-secondary">Decline</button>
+        <button id="consent-accept" class="btn btn-consent">Accept</button>
+    </div>
+  </div>
+
+  <!-- Removed AOS JS Init -->
+  <!-- Removed Scroll Down Arrow HTML & Logic -->
+
+  <script>
+    // Particle background script (kept for now)
+    const canvas = document.getElementById('particles-canvas');
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    window.addEventListener('resize', () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    });
+
+    class Particle {
+      constructor() {
+        this.x = Math.random() * canvas.width;
+        this.y = Math.random() * canvas.height;
+        this.radius = Math.random() * 2;
+        this.speedX = (Math.random() - 0.5) * 1;
+        this.speedY = (Math.random() - 0.5) * 1;
+      }
+
+      update() {
+        this.x += this.speedX;
+        this.y += this.speedY;
+        if (this.x < 0 || this.x > canvas.width) this.speedX *= -1;
+        if (this.y < 0 || this.y > canvas.height) this.speedY *= -1;
+      }
+
+      draw() {
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+        ctx.fillStyle = "rgba(0, 255, 255, 0.5)";
+        ctx.fill();
+      }
+    }
+
+    const particles = [];
+    for (let i = 0; i < 120; i++) particles.push(new Particle());
+
+    function animate() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      for (let p of particles) {
+        p.update();
+        p.draw();
+      }
+      requestAnimationFrame(animate);
+    }
+
+    animate();
+
+    // Smooth Scrolling for internal links (if any were added back)
+    // Not strictly necessary on this page, but kept for potential future use
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const targetId = this.getAttribute('href');
+            if (targetId.length > 1) {
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                  targetElement.scrollIntoView({
+                      behavior: 'smooth'
+                  });
+                }
+            }
+        });
+    });
+
+    // Cookie Consent Logic
+    const consentBanner = document.getElementById('cookie-consent-banner');
+    const acceptBtn = document.getElementById('consent-accept');
+    const declineBtn = document.getElementById('consent-decline');
+    const consentKey = 'ocuva_cookie_consent';
+    const gaTrackingId = 'G-PZ2XKFD18B'; // **** ID Updated ****
+
+    // Ensure gtag function is available
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+
+    function grantConsent() {
+        gtag('consent', 'update', {
+            'analytics_storage': 'granted',
+            'ad_storage': 'granted',
+            'ad_user_data': 'granted',
+            'ad_personalization': 'granted'
+        });
+        localStorage.setItem(consentKey, 'granted');
+        console.log("Consent Granted & GA updated");
+        gtag('config', gaTrackingId); // Configure GA after consent update
+        console.log("GA Configured");
+    }
+
+    function denyConsent() {
+        gtag('consent', 'update', {
+            'analytics_storage': 'denied',
+            'ad_storage': 'denied',
+            'ad_user_data': 'denied',
+            'ad_personalization': 'denied'
+        });
+        localStorage.setItem(consentKey, 'denied');
+        console.log("Consent Denied & GA updated");
+        gtag('config', gaTrackingId); // Still configure GA
+        console.log("GA Configured (with denial)");
+    }
+
+    function handleConsentChoice(granted) {
+        if (granted) {
+            grantConsent();
+        } else {
+            denyConsent();
+        }
+        if(consentBanner) consentBanner.classList.add('hidden');
+    }
+
+    // Check existing consent on page load
+    const currentConsent = localStorage.getItem(consentKey);
+
+    if (!currentConsent) {
+        if(consentBanner) consentBanner.classList.remove('hidden'); // Show banner
+        gtag('config', gaTrackingId); // Config on load (respects default denied)
+        console.log("GA Configured (no prior consent)");
+    } else if (currentConsent === 'granted') {
+        grantConsent(); // Grant consent based on stored preference
+        if(consentBanner) consentBanner.classList.add('hidden'); // Ensure hidden
+    } else { // 'denied'
+        denyConsent(); // Deny consent based on stored preference
+        if(consentBanner) consentBanner.classList.add('hidden'); // Ensure hidden
+    }
+
+    // Add event listeners only if the banner was shown initially
+    if (acceptBtn && declineBtn && !currentConsent) {
+         acceptBtn.addEventListener('click', () => handleConsentChoice(true));
+         declineBtn.addEventListener('click', () => handleConsentChoice(false));
+    }
+
+    // Mobile Menu Toggle
+    const menuToggle = document.getElementById('mobile-menu');
+    const navLinks = document.getElementById('nav-links-menu');
+
+    if (menuToggle && navLinks) {
+        menuToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            menuToggle.classList.toggle('active');
+        });
+    }
+
+  </script>
+</body>
+</html> 
