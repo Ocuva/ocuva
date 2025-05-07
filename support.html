@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Support OCUVA – Help Us Grow</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <!-- Assuming the same CSS styles will be used, or link to an external stylesheet -->
+  <style>
+    /* Basic styles from index.html - consider moving to a shared CSS file */
+    :root {
+      --primary: #00ffff;
+      --primary-glow: rgba(0, 255, 255, 0.2);
+      --primary-dark: #009dff;
+      --bg-dark: #0a0c14;
+      --text-light: #e8f1fc;
+      --transition: all 0.3s ease-in-out;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: radial-gradient(circle at 30% 20%, #0c0f18, #000);
+      color: var(--text-light);
+      overflow-x: hidden;
+      padding: 1rem;
+      position: relative;
+    }
+    .app-shell {
+      position: relative; z-index: 1; max-width: 1100px; margin: 2rem auto;
+      background: rgba(10, 12, 20, 0.9); border-radius: 24px;
+      box-shadow: 0 0 60px rgba(0, 255, 255, 0.08);
+      overflow: hidden; border: 1px solid rgba(0, 255, 255, 0.07);
+      backdrop-filter: blur(14px);
+    }
+    .navbar {
+      border-bottom: 1px solid rgba(0, 255, 255, 0.05); padding: 1rem 1.5rem;
+      display: flex; justify-content: space-between; align-items: center; position: relative;
+    }
+    .logo {
+      color: var(--primary); font-size: 2rem; font-weight: bold; text-decoration: none;
+      animation: pulse-glow 3s infinite ease-in-out; /* Assuming pulse-glow is defined or link CSS */
+    }
+    @keyframes pulse-glow { /* Ensure this is present or in linked CSS */
+      0%, 100% { text-shadow: 0 0 12px var(--primary), 0 0 20px var(--primary-glow); }
+      50% { text-shadow: 0 0 20px var(--primary), 0 0 35px var(--primary-glow); }
+    }
+    .nav-links { display: flex; gap: 2rem; }
+    .nav-links a {
+      color: var(--text-light); text-decoration: none; font-weight: 500; font-size: 1rem;
+      position: relative; transition: var(--transition);
+    }
+    .nav-links a::after {
+      content: ''; position: absolute; width: 0; height: 2px; bottom: -4px; left: 0;
+      background-color: var(--primary); transition: width 0.3s ease;
+    }
+    .nav-links a:hover::after { width: 100%; }
+    .menu-toggle { display: none; /* Add mobile styles if needed */ }
+    .page-content { padding: 3rem 2rem; text-align: center; }
+    .page-content h1 {
+      font-size: 2.5rem; color: var(--primary);
+      text-shadow: 0 0 16px var(--primary-glow); margin-bottom: 1.5rem;
+    }
+    .page-content p {
+      font-size: 1.1rem; max-width: 700px; margin: 0 auto 1.5rem; color: #b8c2d9; line-height: 1.7;
+    }
+    .btn {
+      display: inline-block; margin: 0.5rem; padding: 1rem 2.4rem; font-size: 1rem;
+      font-weight: 600; border-radius: 12px; color: white;
+      background: linear-gradient(135deg, #00baff, #007bff); text-decoration: none;
+      box-shadow: 0 0 20px rgba(0, 255, 255, 0.25); transition: all 0.25s ease-in-out;
+      text-shadow: 0 0 5px rgba(0, 0, 0, 0.4);
+    }
+    .btn:hover { transform: scale(1.05); background: linear-gradient(135deg, #00e0ff, #00aaff); }
+    footer { text-align: center; padding: 2rem; font-size: 0.9rem; background: #0a0d12; color: #777; margin-top: 3rem;}
+
+    /* Mobile Responsiveness - minimal for now, copy from index.html if full support needed */
+    @media (max-width: 768px) {
+        .nav-links { /* Basic mobile nav handling */
+            display: none; /* Will be toggled by JS */
+            flex-direction: column; position: absolute; top: 100%; right: 1.5rem;
+            background: rgba(10,12,20,0.95); border: 1px solid rgba(0,255,255,0.1);
+            border-radius: 8px; padding: 0.5rem; width: 200px;
+        }
+        .nav-links.active { display: flex; }
+        .menu-toggle { display: flex; flex-direction:column; justify-content:space-around; width:30px; height:24px; cursor:pointer; }
+        .menu-toggle span { height:2px; width:100%; background:var(--text-light); border-radius:1px; }
+        .page-content h1 { font-size: 2rem; }
+        .page-content p { font-size: 1rem; }
+    }
+  </style>
+</head>
+<body>
+  <div class="app-shell">
+    <nav class="navbar">
+      <a href="index.html" class="logo">OCUVA</a>
+      <div class="menu-toggle" id="mobile-menu">
+        <span></span><span></span><span></span>
+      </div>
+      <div class="nav-links" id="nav-links-menu">
+        <a href="index.html#features">Features</a>
+        <a href="about.html">About</a>
+        <a href="pricing.html">Pricing</a>
+        <a href="support.html">Support</a>
+        <a href="index.html#signup">Sign Up</a>
+      </div>
+    </nav>
+
+    <section class="page-content" data-aos="fade-up">
+      <h1>Support the Development of OCUVA</h1>
+      <p>
+        OCUVA is dedicated to revolutionizing content creation with intelligent AI tools. 
+        Your contribution helps us cover development costs, maintain server infrastructure, 
+        and invest more time into building innovative features and enhancing the platform for everyone.
+      </p>
+      <p>
+        Every bit of support, whether big or small, fuels our mission and is deeply appreciated. 
+        Help us shape the future of streaming and content intelligence!
+      </p>
+      <a href="https://buymeacoffee.com/ocuva" class="btn" target="_blank" rel="noopener noreferrer">
+        Support OCUVA on Buy Me a Coffee
+      </a>
+      <p style="margin-top: 2rem;">Thank you for believing in OCUVA!</p>
+    </section>
+
+    <footer>
+      © 2025 OCUVA – Built by Dave Nevis
+    </footer>
+  </div>
+
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+    AOS.init({ duration: 800, once: true, offset: 100 });
+
+    // Mobile menu toggle (basic version)
+    const menuToggle = document.getElementById('mobile-menu');
+    const navLinks = document.getElementById('nav-links-menu');
+    if (menuToggle && navLinks) {
+      menuToggle.addEventListener('click', () => {
+        navLinks.classList.toggle('active');
+      });
+    }
+  </script>
+</body>
+</html> 

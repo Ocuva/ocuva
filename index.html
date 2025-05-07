@@ -25,6 +25,15 @@
     // Config will be called later based on consent
   </script>
   <style>
+    @keyframes pulse-glow {
+      0%, 100% {
+        text-shadow: 0 0 12px var(--primary), 0 0 20px var(--primary-glow);
+      }
+      50% {
+        text-shadow: 0 0 20px var(--primary), 0 0 35px var(--primary-glow);
+      }
+    }
+
     :root {
       --primary: #00ffff;
       --primary-glow: rgba(0, 255, 255, 0.2);
@@ -93,7 +102,8 @@
       font-size: 2rem;
       font-weight: bold;
       text-decoration: none;
-      text-shadow: 0 0 12px var(--primary);
+      /* text-shadow: 0 0 12px var(--primary); */ /* Base will be set by animation */
+      animation: pulse-glow 3s infinite ease-in-out;
     }
 
     .logo:hover {
@@ -646,6 +656,7 @@
         <a href="#features">Features</a>
         <a href="about.html">About</a>
         <a href="pricing.html">Pricing</a>
+        <a href="support.html">Support</a>
         <a href="#signup">Sign Up</a>
       </div>
     </nav>
@@ -655,7 +666,7 @@
         <h1>Stream Smarter with OCUVA</h1>
         <p>The visual AI assistant born from an aquarium stream — now built for every creator.</p>
         <a href="#signup" class="btn">Request Early Access</a>
-        <a href="https://buymeacoffee.com/davenevis" class="btn">Become a Supporter</a>
+        <a href="https://buymeacoffee.com/ocuva" class="btn">Become a Supporter</a>
       </div>
     </section>
 
